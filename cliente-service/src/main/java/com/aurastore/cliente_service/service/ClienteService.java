@@ -1,6 +1,8 @@
 package com.aurastore.cliente_service.service;
 
+import com.aurastore.cliente_service.client.VendaClient;
 import com.aurastore.cliente_service.dto.ClienteRequestDTO;
+import com.aurastore.cliente_service.dto.VendaDTO;
 import com.aurastore.cliente_service.model.Cliente;
 import com.aurastore.cliente_service.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import java.util.List;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final VendaClient vendaClient;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, VendaClient vendaClient) {
         this.clienteRepository = clienteRepository;
+        this.vendaClient = vendaClient;
     }
 
     public Cliente criarCliente(ClienteRequestDTO dto) {
@@ -44,6 +48,12 @@ public class ClienteService {
         }
 
         return cliente;
+    }
+
+    public List<VendaDTO> buscarVendasDoCliente(Long id) {
+        buscarClientePorId(id);
+
+        return vendaClient.buscarVendasPorClienteId(id);
     }
 
     public void removerCliente(Long id) {
