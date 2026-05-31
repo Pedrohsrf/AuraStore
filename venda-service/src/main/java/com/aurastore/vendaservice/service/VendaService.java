@@ -1,5 +1,7 @@
 package com.aurastore.vendaservice.service;
 
+import com.aurastore.vendaservice.client.ClienteClient;
+import com.aurastore.vendaservice.dto.ClienteDTO;
 import com.aurastore.vendaservice.dto.VendaRequestDTO;
 import com.aurastore.vendaservice.model.Venda;
 import com.aurastore.vendaservice.repository.VendaRepository;
@@ -12,18 +14,27 @@ import java.util.List;
 public class VendaService {
 
     private final VendaRepository vendaRepository;
+    private final ClienteClient clienteClient;
 
-    public VendaService(VendaRepository vendaRepository) {
+    public VendaService(VendaRepository vendaRepository, ClienteClient clienteClient) {
         this.vendaRepository = vendaRepository;
+        this.clienteClient = clienteClient;
     }
 
     public Venda criarVenda(VendaRequestDTO dto) {
         validarVenda(dto);
 
+        ClienteDTO cliente = clienteClient.buscarClientePorId(dto.getClienteId());
+
+        if (cliente == null) {
+            throw new RuntimeException("Cliente não encontrado.");
+        }
+
         BigDecimal valorTotal = dto.getValorUnitario()
                 .multiply(BigDecimal.valueOf(dto.getQuantidade()));
 
         Venda venda = new Venda();
+        venda.setClienteId(dto.getClienteId());
         venda.setProdutoId(dto.getProdutoId());
         venda.setQuantidade(dto.getQuantidade());
         venda.setValorUnitario(dto.getValorUnitario());
@@ -47,6 +58,10 @@ public class VendaService {
         return venda;
     }
 
+    public List<Venda> buscarVendasPorClienteId(Long clienteId) {
+        return vendaRepository.buscarPorClienteId(clienteId);
+    }
+
     public Venda cancelarVenda(Long id) {
         Venda venda = buscarVendaPorId(id);
         venda.setStatus("CANCELADA");
@@ -62,6 +77,10 @@ public class VendaService {
     }
 
     private void validarVenda(VendaRequestDTO dto) {
+        if (dto.getClienteId() == null) {
+            throw new RuntimeException("O cliente é obrigatório.");
+        }
+
         if (dto.getProdutoId() == null) {
             throw new RuntimeException("O produto é obrigatório.");
         }

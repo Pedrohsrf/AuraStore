@@ -4,11 +4,16 @@ import java.math.BigDecimal;
 
 public class VendaRequestDTO {
 
+    private Long clienteId;
     private Long produtoId;
     private Integer quantidade;
     private BigDecimal valorUnitario;
 
     public VendaRequestDTO() {
+    }
+
+    public Long getClienteId() {
+        return clienteId;
     }
 
     public Long getProdutoId() {
@@ -21,6 +26,10 @@ public class VendaRequestDTO {
 
     public BigDecimal getValorUnitario() {
         return valorUnitario;
+    }
+
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
     }
 
     public void setProdutoId(Long produtoId) {

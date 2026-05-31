@@ -33,6 +33,11 @@ public class VendaController {
         return vendaService.buscarVendaPorId(id);
     }
 
+    @GetMapping("/cliente/{clienteId}")
+    public List<Venda> buscarVendasPorClienteId(@PathVariable Long clienteId) {
+        return vendaService.buscarVendasPorClienteId(clienteId);
+    }
+
     @PutMapping("/{id}/cancelar")
     public Venda cancelarVenda(@PathVariable Long id) {
         return vendaService.cancelarVenda(id);

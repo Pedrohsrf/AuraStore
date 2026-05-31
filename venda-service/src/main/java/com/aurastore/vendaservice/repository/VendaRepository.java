@@ -29,6 +29,18 @@ public class VendaRepository {
         return vendas.get(id);
     }
 
+    public List<Venda> buscarPorClienteId(Long clienteId) {
+        List<Venda> vendasDoCliente = new ArrayList<>();
+
+        for (Venda venda : vendas.values()) {
+            if (venda.getClienteId() != null && venda.getClienteId().equals(clienteId)) {
+                vendasDoCliente.add(venda);
+            }
+        }
+
+        return vendasDoCliente;
+    }
+
     public void remover(Long id) {
         vendas.remove(id);
     }
