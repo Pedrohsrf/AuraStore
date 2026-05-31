@@ -76,6 +76,15 @@ public class VendaService {
         vendaRepository.remover(id);
     }
 
+    public ClienteDTO buscarClienteDaVenda(Long vendaId) {
+
+        Venda venda = buscarVendaPorId(vendaId);
+
+        return clienteClient.buscarClientePorId(
+                venda.getClienteId()
+        );
+    }
+
     private void validarVenda(VendaRequestDTO dto) {
         if (dto.getClienteId() == null) {
             throw new RuntimeException("O cliente é obrigatório.");

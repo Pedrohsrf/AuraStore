@@ -1,5 +1,6 @@
 package com.aurastore.vendaservice.controller;
 
+import com.aurastore.vendaservice.dto.ClienteDTO;
 import com.aurastore.vendaservice.dto.VendaRequestDTO;
 import com.aurastore.vendaservice.model.Venda;
 import com.aurastore.vendaservice.service.VendaService;
@@ -36,6 +37,11 @@ public class VendaController {
     @GetMapping("/cliente/{clienteId}")
     public List<Venda> buscarVendasPorClienteId(@PathVariable Long clienteId) {
         return vendaService.buscarVendasPorClienteId(clienteId);
+    }
+
+    @GetMapping("/{id}/cliente")
+    public ClienteDTO buscarClienteDaVenda(@PathVariable Long id) {
+        return vendaService.buscarClienteDaVenda(id);
     }
 
     @PutMapping("/{id}/cancelar")
