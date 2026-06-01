@@ -1,67 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aura Store</title>
-    <link rel="stylesheet" href="style.css">
+<title>Aura Store</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <h1>Aura Store</h1>
-
 <h2>Cliente Service</h2>
-
 <input id="nome" placeholder="Nome">
 <input id="email" placeholder="Email">
 <input id="telefone" placeholder="Telefone">
-
-<button onclick="criarCliente()">
-    Cadastrar Cliente
-</button>
-
-<button onclick="listarClientes()">
-    Listar Clientes
-</button>
-
+<button onclick="criarCliente()">Cadastrar Cliente</button>
+<button onclick="listarClientes()">Listar Clientes</button>
 <hr>
-
 <h2>Venda Service</h2>
-
 <input id="clienteId" placeholder="Cliente ID">
 <input id="produtoId" placeholder="Produto ID">
 <input id="quantidade" placeholder="Quantidade">
 <input id="valorUnitario" placeholder="Valor Unitário">
-
-<button onclick="criarVenda()">
-    Criar Venda
-</button>
-
-<button onclick="listarVendas()">
-    Listar Vendas
-</button>
-
+<button onclick="criarVenda()">Criar Venda</button>
+<button onclick="listarVendas()">Listar Vendas</button>
 <hr>
-
 <h2>Cliente Consumindo Venda</h2>
-
 <input id="clienteBusca" placeholder="Cliente ID">
-
-<button onclick="buscarVendasCliente()">
-    Buscar Vendas do Cliente
-</button>
-
+<button onclick="buscarVendasCliente()">Buscar Vendas do Cliente</button>
 <hr>
-
 <h2>Venda Consumindo Cliente</h2>
-
 <input id="vendaBusca" placeholder="ID da Venda">
-
-<button onclick="buscarClienteDaVenda()">
-    Buscar Cliente da Venda
-</button>
-
+<button onclick="buscarClienteDaVenda()">Buscar Cliente da Venda</button>
+<hr>
+<h2>Estoque Service</h2>
+<input id="nomeProduto" placeholder="Nome do Produto">
+<input id="quantidadeEstoque" placeholder="Quantidade">
+<button onclick="criarEstoque()">Cadastrar Estoque</button>
+<button onclick="listarEstoques()">Listar Estoque</button>
+<hr>
 <pre id="resultado"></pre>
-
 <script src="script.js"></script>
-
 </body>
-</html>
